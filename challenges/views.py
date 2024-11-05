@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Create your views here.
 
-monthly_challenges = {
+monthly_challenges_data = {
     "january": "Jan Challenge",
     "february": "Feb Challenge",
     "march": "March Challenge",
@@ -21,18 +21,18 @@ monthly_challenges = {
 
 def index(request):
     list_items = ""
-    months = list(monthly_challenges.keys())
+    months = list(monthly_challenges_data.keys())
 
     for month in months:
-        capatilized_month = month.capatalize()
-        month_path = reverse("month-chhalleneg", args=[month])
+        capatilized_month = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
         list_items += f"<li><a href=\"{month_path}\">{capatilized_month}</a></li>"
     
     response_data = f"<ul>{list_items}</ul>"
-    return HttpResponse()
+    return HttpResponse(response_data)
 
 def monthly_challenges_number(request, month):
-    months = list(monthly_challenges.keys())
+    months = list(monthly_challenges_data.keys())
     if month > len(months):
         return HttpResponseNotFound("<h1>Invalid Month</h1>")
     redirect_month = months[month-1]
@@ -42,7 +42,7 @@ def monthly_challenges_number(request, month):
 
 def monthly_challenges(request, month):
     try:
-        challenge_text = monthly_challenges[month]
+        challenge_text = monthly_challenges_data[month]
         response_data = f"<h1>{challenge_text}</h1>"
         return HttpResponse(response_data)
     except:
