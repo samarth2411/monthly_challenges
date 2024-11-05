@@ -11,6 +11,9 @@ from django.http import HttpResponse, HttpResponseNotFound
 # def feb(request):
 #     return HttpResponse("Feb Works!!")
 
+def monthly_challenges_number(request,month):
+    return HttpResponse(month)
+
 def monthly_challenges(request, month):
     if month == "january":
         challenge_text = "Jan Text!!"
