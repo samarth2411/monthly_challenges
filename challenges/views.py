@@ -43,7 +43,10 @@ def monthly_challenges_number(request, month):
 def monthly_challenges(request, month):
     try:
         challenge_text = monthly_challenges_data[month]
-        return render(request, "challenges/challenge.html")
+        return render(request, "challenges/challenge.html", {
+            "text": challenge_text,
+            "month": month.capitalize()
+        })
         # response_data = render_to_string("challenges/challenge.html")
         # return HttpResponse(response_data)
     except:
